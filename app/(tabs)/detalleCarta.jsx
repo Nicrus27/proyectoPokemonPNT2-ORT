@@ -1,0 +1,3 @@
+/*
+detalles de carta
+*/
