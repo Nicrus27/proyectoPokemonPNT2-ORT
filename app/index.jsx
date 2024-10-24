@@ -9,4 +9,3 @@ export default function HomePage() {
     </View>
   )
 }
-//probando rama dev
