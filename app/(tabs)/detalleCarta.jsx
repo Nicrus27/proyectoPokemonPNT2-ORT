@@ -1,3 +1,0 @@
-/*
-detalles de carta
-*/
