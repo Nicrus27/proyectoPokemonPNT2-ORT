@@ -1,53 +1,121 @@
-import { Link } from 'expo-router';
-import {Button, Image, StyleSheet, Text, View} from 'react-native';
-//import Botones from '../components/componentesDeBotonHamburguesa/botones';
+import React, { useState } from 'react';
+import { Button, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
+import { useRouter } from 'expo-router';
 
-export default function HomePage() {
+export default function Acceder(){
 
-  const image = 'https://i.gifer.com/fetch/w300-preview/a7/a742fbe8ed45f6455cc767ab4c41997e.gif';
+  const router = useRouter();
+  const fotoPerfil = 'https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=';
+  
+  const [usuario, setUsuario] = useState('');
+  const [email, setEmail] = useState('');
+  const [contraseña, setContraseña] = useState('');
+  const [enLogin, setEnLogin] = useState(true);
+  const [warningMensaje, setWarningMensaje] = useState('');
+  
+
+  async function accederConUsuario(){
+    try {
+      const dataUsuarios = await fetch('https://670eaaad3e71518616556bcd.mockapi.io/usuarios');
+      const dataUsuariosEnArray = await dataUsuarios.json();
+      const usuarioEncontrado = dataUsuariosEnArray.find((usu)=> usu.usuario === usuario && usu.contrasenia === contraseña);
+
+      if(usuarioEncontrado){
+        router.replace('/pags');
+      }else{
+        throw new Error("usuario o contraseña erroneas");
+      }
+    } catch(error){
+      console.log(error.message);
+      setWarningMensaje(error.message);
+      setUsuario('');
+      setContraseña('');
+    }
+  }
+
+  async function agregarUsuario(){
+    
+    try {
+      const dataUsuarios = await fetch('https://670eaaad3e71518616556bcd.mockapi.io/usuarios');
+      const dataUsuariosEnArray = await dataUsuarios.json();
+      const usuarioEncontrado = dataUsuariosEnArray.find((usu)=> usu.usuario === usuario);
+      if(usuarioEncontrado){
+        throw new Error("usuario en uso, por favor elija otro");
+      }else{
+        const respuesta = await fetch('https://670eaaad3e71518616556bcd.mockapi.io/usuarios',
+        {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({
+            usuario: usuario,
+            email: email,
+            contrasenia: contraseña,
+            imagen: fotoPerfil,
+            packComunPlata: [],
+            packPocoComunVerde: [],
+            packRaroAzul: [],
+            packRaroHoloVioleta: [],
+            packUltraRaroNegro: [],
+            packLegendarioDorado: [],
+            admin: false,
+          })
+        });
+        console.log(6);
+        if(respuesta.ok){
+          console.log(7);
+          router.replace('/pags');
+        } else {
+          throw new Error('error en autenticacion');
+        }
+        
+      }
+    } catch(error){
+      console.log(error.message);
+      setWarningMensaje(error.message);
+      setUsuario('');
+    }
+  }
+
+
 
   return (
-    <View style={styles.viewPrincipal}>
-
-      <Text style={styles.titulo}>Alguna de estas cartas podria ser tuya!</Text>
-      <Image style={styles.imagen} source={{uri:image}}/>
-      <View style={styles.vistaBotonCarrito}>
-        <Button title="Agregar al carrito" />
-      </View>
-      <View style={styles.cajaBotones}>
-        <Link href='/acceder'>
-          <Button title='Iniciar Sesion'/>
-        </Link>
-        
-        <Button title='Registrarse'/>
+    <View>
+      {
+        warningMensaje
+        ?
+        <Text>{warningMensaje}</Text>
+        :
+        <></>
+      }
+      <Text>Usuario</Text>
+      <TextInput style={styles.input} value={usuario} onChangeText={setUsuario} />
+      {
+        enLogin
+        ?
+        <></>
+        :
+        <View>
+            <Text>Email</Text>
+            <TextInput style={styles.input} value={email} onChangeText={setEmail} />
+          </View>
+      }
+      <Text>Contraseña</Text>
+      <TextInput style={styles.input} value={contraseña} onChangeText={setContraseña} />
+      <Button title={enLogin ? 'Iniciar Sesion' : 'Registrarse'} onPress={enLogin ? accederConUsuario : agregarUsuario} />
+      <View>
+        <Text>Cambiar a {enLogin ? 'Registrarse' : 'Iniciar Sesion'}</Text>
+        <Switch value={enLogin} onValueChange={setEnLogin}/>
       </View>
     </View>
   )
 }
 
-
 const styles = StyleSheet.create({
-  titulo: {
-  fontFamily: 'Verdana, Arial, Helvetica',
-  textShadowColor: 'yellow', 
-  textShadowOffset: { width: 4, height: 4 },  
-  padding: 5
-  },
-  viewPrincipal: {
 
-    alignItems: 'center'
-  },
-  vistaBotonCarrito: {
-    padding: 2
-  },
-  imagen: {
-    width: 300,
-    height: 200
-  },
-  cajaBotones: {
-    margin: 20,
-    width: 400,
-    flexDirection: 'row',
-    justifyContent: 'space-around'
+  input:{
+    height: 30,
+
+
+    border: '2px solid black'
   }
-});
+})
