@@ -100,7 +100,7 @@ export default function Acceder(){
           </View>
       }
       <Text>Contraseña</Text>
-      <TextInput style={styles.input} value={contraseña} onChangeText={setContraseña} />
+      <TextInput style={styles.input} value={contraseña} onChangeText={setContraseña} secureTextEntry={true}/>
       <Button title={enLogin ? 'Iniciar Sesion' : 'Registrarse'} onPress={enLogin ? accederConUsuario : agregarUsuario} />
       <View>
         <Text>Cambiar a {enLogin ? 'Registrarse' : 'Iniciar Sesion'}</Text>
