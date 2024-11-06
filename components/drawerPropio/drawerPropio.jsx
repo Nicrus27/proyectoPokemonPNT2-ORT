@@ -1,6 +1,6 @@
 import { Link } from 'expo-router';
 import { useState } from 'react';
-import { Button, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Feather from '@expo/vector-icons/Feather';
@@ -24,16 +24,16 @@ export default function DrawerPropio(){
     <>
       
       <Pressable onPress={abrirCerrarDrawer}>
-        <Image style={styles.imagen} source={{uri:'https://cdn-icons-png.flaticon.com/512/6798/6798294.png'}}/>
+        <AntDesign name="menufold" size={24} color="black" />
       </Pressable>
       {
         puertaDrawer 
         ?
         <View>
-          <BotonDeDrawer link='panelGeneral' icon={iconoPanel} iconName='' buttonName='Panel General'/>
-          <BotonDeDrawer link='carrito' icon={iconoCarrito} buttonName='Carrito'/>
-          <BotonDeDrawer link='colecciones' icon={iconoColeccion} buttonName='Colecciones'/>
-          <BotonDeDrawer link='perfil' icon={iconoPerfil} buttonName='Configuracion'/>
+          <BotonDeDrawer link='/pags' icon={iconoPanel} iconName='' buttonName='Panel General'/>
+          <BotonDeDrawer link='/pags/carrito' icon={iconoCarrito} buttonName='Carrito'/>
+          <BotonDeDrawer link='/pags/colecciones' icon={iconoColeccion} buttonName='Colecciones'/>
+          <BotonDeDrawer link='/pags/perfil' icon={iconoPerfil} buttonName='Configuracion'/>
         </View>
         :
         <></>
