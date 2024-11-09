@@ -5,11 +5,13 @@ import { Link } from 'expo-router';
 export default function BotonDeDrawer({link, icon, buttonName}){
 
   return (
-    <Pressable>
+    
       <Link href={link}>
         {icon}
         <Text>{buttonName}</Text>
       </Link>
-    </Pressable>
+    
   )
 }
+
+//<Pressable> </Pressable>
