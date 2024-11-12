@@ -10,12 +10,12 @@ export default function RootLayout(){
     <>
       <DrawerPropio/>
       <Stack>
-        <Stack.Screen name='index' />        
-        <Stack.Screen name='carrito' />
-        <Stack.Screen name='colecciones' />
-        <Stack.Screen name='detalleCarta' />
-        <Stack.Screen name='detallePaquete' />
-        <Stack.Screen name='perfil' />
+        <Stack.Screen name='index' options={{title: 'Panel General'}}/>        
+        <Stack.Screen name='carrito' options={{title: 'Carrito'}} />
+        <Stack.Screen name='colecciones' options={{title: 'Colecciones'}} />
+        <Stack.Screen name='detalleCarta' options={{title: 'Carta'}} />
+        <Stack.Screen name='[detallePaquete]' options={{title: 'Paquete'}} />
+        <Stack.Screen name='perfil' options={{title: 'Perfil'}} />
       </Stack>
     </>
 
