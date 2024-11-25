@@ -1,16 +1,27 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import PaqueteMuestra from '../../components/componenteDePaquete/paqueteMuestra'
 
-export default function PanelGeneral(){
+export default function PanelGeneral(){ //
   return (
-    <View>
-      <PaqueteMuestra color={"Silver"}/>
-      <PaqueteMuestra color={"LawnGreen"}/>
-      <PaqueteMuestra color={"DodgerBlue"}/>
-      <PaqueteMuestra color={"DarkViolet"}/>
-      <PaqueteMuestra color={"Black"}/>
-      <PaqueteMuestra color={"Gold"}/>
+    <View style={styles.container}>
+      <PaqueteMuestra color={"silver"}/>
+      <PaqueteMuestra color={"green"}/>
+      <PaqueteMuestra color={"blue"}/>
+      <PaqueteMuestra color={"purple"}/>
+      <PaqueteMuestra color={"black"}/>
+      <PaqueteMuestra color={"gold"}/>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  }
+})
