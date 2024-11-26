@@ -1,20 +1,19 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import PaqueteMuestra from '../../components/componenteDePaquete/paqueteMuestra'
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import PaqueteMuestra from '../../components/componenteDePaquete/paqueteMuestra';
 
-export default function PanelGeneral(){ //
+export default function PanelGeneral() {
   return (
     <View style={styles.container}>
-      <PaqueteMuestra color={"silver"}/>
-      <PaqueteMuestra color={"green"}/>
-      <PaqueteMuestra color={"blue"}/>
-      <PaqueteMuestra color={"purple"}/>
-      <PaqueteMuestra color={"black"}/>
-      <PaqueteMuestra color={"gold"}/>
+      <PaqueteMuestra color="silver" />
+      <PaqueteMuestra color="green" />
+      <PaqueteMuestra color="blue" />
+      <PaqueteMuestra color="purple" />
+      <PaqueteMuestra color="black" />
+      <PaqueteMuestra color="gold" />
     </View>
-  )
+  );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -23,5 +22,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-  }
-})
+  },
+});
+
+
