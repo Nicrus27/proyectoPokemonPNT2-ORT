@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { AuthContext } from '../contextos/authContext/AuthContext';
+
 
 export default function Acceder(){
+
+  const { guardarInicioSesion, status } = useContext(AuthContext);
+  
 
   const router = useRouter();
   const fotoPerfil = 'https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=';
@@ -21,7 +26,8 @@ export default function Acceder(){
       const usuarioEncontrado = dataUsuariosEnArray.find((usu)=> usu.usuario === usuario && usu.contrasenia === contraseña);
 
       if(usuarioEncontrado){
-        router.replace('/pags');
+        guardarInicioSesion(usuario, contraseña);
+        //router.replace('/pags');
       }else{
         throw new Error("usuario o contraseña erroneas");
       }
@@ -62,8 +68,8 @@ export default function Acceder(){
         });
         console.log(6);
         if(respuesta.ok){
-          console.log(7);
-          router.replace('/pags');
+        guardarInicioSesion(usuario, contraseña);
+          //router.replace('/pags');
         } else {
           throw new Error('error en autenticacion');
         }
@@ -76,7 +82,12 @@ export default function Acceder(){
     }
   }
 
-
+  useEffect(() => {
+    console.log(status);
+    if(status === 'isAuthenticated'){
+      router.replace('/pags');
+    }
+  }, [status])
 
   return (
     <View>
@@ -119,3 +130,4 @@ const styles = StyleSheet.create({
     border: '2px solid black'
   }
 })
+
