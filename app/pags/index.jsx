@@ -5,14 +5,11 @@ import PaqueteMuestra from '../../components/componenteDePaquete/paqueteMuestra'
 import {AuthContext} from '../../contextos/authContext/AuthContext';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 
-
-
-export default function PanelGeneral(){ //
-
+export default function PanelGeneral(){
   const {status} = useContext(AuthContext);
-  const router = useRouter();
+  //const router = useRouter();
 
-
+  const colores = ['silver', 'green', 'blue', 'purple', 'black', 'gold']
   useEffect(() => {
     /*
     if(status !== 'isAuthenticated'){
@@ -21,20 +18,14 @@ export default function PanelGeneral(){ //
     */
     
   }, [status])
-
-
   return (
     <View style={styles.container}>
-      <PaqueteMuestra color={"silver"}/>
-      <PaqueteMuestra color={"green"}/>
-      <PaqueteMuestra color={"blue"}/>
-      <PaqueteMuestra color={"purple"}/>
-      <PaqueteMuestra color={"black"}/>
-      <PaqueteMuestra color={"gold"}/>
+      {
+        colores.map((colorPaquete, index) => <PaqueteMuestra key={index} color={colorPaquete}/>)
+      }
     </View>
-  )
+  );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -43,8 +34,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-  }
-})
+  },
+});
+
 
 
 /*

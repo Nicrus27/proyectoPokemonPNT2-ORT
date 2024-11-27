@@ -22,6 +22,7 @@ NO BORRAR!!!
 
 const { arrayComunes, arrayPocoComunes, arrayRaras, arrayUltraRaras, arrayEpicas, arrayLegendaria } = require ("./arrayIdCartas.js");
 const colorPaquetes = ["plateado", "verde", "azul", "violeta", "negro", "dorado"];
+const cantidadCartasSegunPaquete = [5, 6, 7 ,8 ,9 ,10];
 const rarezas = ["comun", "poco comun", "raro", "ultra raro", "epico", "legendario"];
 
 
@@ -240,4 +241,4 @@ console.log(resuelto);
 */
 
 
-module.exports = {obtenerRarezasABuscarSegunColorPaquete, peticionCarta};
+module.exports = {obtenerRarezasABuscarSegunColorPaquete, peticionCarta, cantidadCartasSegunPaquete};

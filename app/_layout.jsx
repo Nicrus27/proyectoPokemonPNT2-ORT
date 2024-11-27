@@ -1,9 +1,8 @@
 import {Stack} from 'expo-router';
 import AuthProvider from '../contextos/authContext/AuthContext';
 
-export default function RootLayout(){
-
-  return(
+export default function RootLayout() {
+  return (
     <>
       <AuthProvider>
         <Stack screenOptions={{ headerShown: false }}>
@@ -12,8 +11,10 @@ export default function RootLayout(){
         </Stack>
       </AuthProvider>
     </>
-
-  )
+  );
 }
+
+
+
 
 
